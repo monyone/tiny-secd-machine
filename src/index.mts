@@ -3,7 +3,7 @@ import type { Environment } from "./environment.mts";
 import { Ap, Variable, type Expression } from "./expression.mts";
 import { Closure, instructionToString, type State } from "./instruction.mts";
 
-export const secd = (expr: Expression) => {
+export default (expr: Expression) => {
   let state: State = [];
   let env: Environment = [];
   let code: Expression[] = [expr];

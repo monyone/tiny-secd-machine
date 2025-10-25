@@ -1,12 +1,13 @@
 import { describe, it, expect } from 'vitest';
-import { secd } from '../src/index.mts';
+import machine from '../src/index.mts';
 import { Abstraction, Application, Variable } from '../src/expression.mts';
+
 
 describe('SECD Machine', () => {
   describe('Variable', () => {
     it('未束縛の変数はそのまま返される', () => {
       const expr = Variable.from('x');
-      const result = secd(expr);
+      const result = machine(expr);
       expect(result).toEqual({ type: 'Variable', name: 'x' });
     });
   });
@@ -15,7 +16,7 @@ describe('SECD Machine', () => {
     it('ラムダ抽象はクロージャになる', () => {
       // λx.x
       const expr = Abstraction.from(Variable.from('x'), Variable.from('x'));
-      const result = secd(expr);
+      const result = machine(expr);
       expect(result?.type).toBe('Closure');
       expect(result).toHaveProperty('parameter');
       expect(result).toHaveProperty('body');
@@ -30,7 +31,7 @@ describe('SECD Machine', () => {
         Abstraction.from(Variable.from('x'), Variable.from('x')),
         Variable.from('a')
       );
-      const result = secd(expr);
+      const result = machine(expr);
       expect(result).toEqual({ type: 'Variable', name: 'a' });
     });
 
@@ -42,7 +43,7 @@ describe('SECD Machine', () => {
       );
       const step1 = Application.from(kCombinator, Variable.from('a'));
       const expr = Application.from(step1, Variable.from('b'));
-      const result = secd(expr);
+      const result = machine(expr);
       expect(result).toEqual({ type: 'Variable', name: 'a' });
     });
 
@@ -58,7 +59,7 @@ describe('SECD Machine', () => {
         ),
         Variable.from('b')
       );
-      const result = secd(expr);
+      const result = machine(expr);
       expect(result).toEqual({ type: 'Variable', name: 'b' });
     });
 
@@ -75,7 +76,7 @@ describe('SECD Machine', () => {
         ),
         Variable.from('a')
       );
-      const result = secd(expr);
+      const result = machine(expr);
       expect(result).toEqual({ type: 'Variable', name: 'b' });
     });
 
@@ -92,7 +93,7 @@ describe('SECD Machine', () => {
         ),
         Variable.from('b')
       );
-      const result = secd(expr);
+      const result = machine(expr);
       expect(result).toEqual({ type: 'Variable', name: 'a' });
     });
 
@@ -104,7 +105,7 @@ describe('SECD Machine', () => {
         Application.from(Variable.from('x'), Variable.from('x'))
       );
       const expr = Application.from(selfApp, identity);
-      const result = secd(expr);
+      const result = machine(expr);
       expect(result?.type).toBe('Closure');
     });
   });
