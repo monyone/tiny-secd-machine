@@ -8,7 +8,7 @@ export type Closure = {
   env: Environment;
 };
 export const Closure = {
-  form(parameter: Variable, body: Expression, env: Environment): Closure {
+  from(parameter: Variable, body: Expression, env: Environment): Closure {
     return { type: 'Closure', parameter, body, env: structuredClone(env) };
   },
 };

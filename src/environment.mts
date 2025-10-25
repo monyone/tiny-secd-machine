@@ -1,4 +1,4 @@
-import type { Variable } from "./expression.mjs";
-import type { Instruction } from "./instruction.mjs";
+import type { Variable } from "./expression.mts";
+import type { Instruction } from "./instruction.mts";
 
 export type Environment = [Variable, Instruction][];

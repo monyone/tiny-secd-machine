@@ -23,7 +23,7 @@ export const secd = (expr: Expression) => {
 
       switch (expr.type) {
         case 'Abstraction':
-          state.push(Closure.form(expr.parameter, expr.body, env));
+          state.push(Closure.from(expr.parameter, expr.body, env));
           break;
         case 'Variable':
           state.push(env.findLast((e) => e[0].name === expr.name)?.[1] ?? Variable.from(expr.name));
