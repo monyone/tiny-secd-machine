@@ -1,0 +1,15 @@
+{
+  "name": "tiny-secd-machine",
+  "version": "0.0.1",
+  "description": "Tiny SECD Machine implementation in TypeScript",
+  "main": "src/index.mts",
+  "license": "WTFPL",
+  "private": true,
+  "scripts": {
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.3"
+  }
+}
