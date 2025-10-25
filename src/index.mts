@@ -1,12 +1,12 @@
 import { Dump } from "./dump.mts";
 import type { Environment } from "./environment.mts";
-import { Ap, Variable, type Expression } from "./expression.mts";
+import { Ap, Variable, type Code, type Expression } from "./expression.mts";
 import { Closure, instructionToString, type State } from "./instruction.mts";
 
 export default (expr: Expression) => {
   let state: State = [];
   let env: Environment = [];
-  let code: Expression[] = [expr];
+  let code: Code = [expr];
   let dump: Dump[] = [];
 
   while (true) {

@@ -35,5 +35,6 @@ export const Ap = {
     return { type: 'Ap' };
   },
 }
-export type Expression = Variable | Abstraction | Application | Ap;
-export type Code = Expression[];
+export type Expression = Variable | Abstraction | Application;
+export type Control = Expression | Ap;
+export type Code = Control[];
