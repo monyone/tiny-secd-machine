@@ -30,19 +30,19 @@ export default (expr: Expression) => {
           break;
         case 'Application':
           code.push(Ap.from());
-          code.push(expr.operator);
           code.push(expr.operand);
+          code.push(expr.operator);
           break;
         case 'Ap':
-          const inst1 = state.pop()!;
-          const inst2 = state.pop()!;
-          if (inst1.type === 'Closure') {
+          const operand = state.pop()!;
+          const operator = state.pop()!;
+          if (operator.type === 'Closure') {
             dump.push(Dump.from(state, env, code));
             state = [];
-            env = [... inst1.env, [inst1.parameter, inst2]];
-            code = [inst1.body];
+            env = [... operator.env, [operator.parameter, operand]];
+            code = [operator.body];
           } else {
-            state.push(Unevaluated.from(`(${instructionToString(inst1)} ${instructionToString(inst2)})`));
+            state.push(Unevaluated.from(`(${instructionToString(operator)} ${instructionToString(operand)})`));
           }
           break;
       }
