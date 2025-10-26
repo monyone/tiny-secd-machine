@@ -1,7 +1,7 @@
 import { Dump } from "./dump.mts";
 import type { Environment } from "./environment.mts";
 import { Ap, Variable, type Code, type Expression } from "./expression.mts";
-import { Closure, instructionToString, type State } from "./instruction.mts";
+import { Closure, instructionToString, Unevaluated, type State } from "./instruction.mts";
 
 export default (expr: Expression) => {
   let state: State = [];
@@ -42,7 +42,7 @@ export default (expr: Expression) => {
             env = [... inst1.env, [inst1.parameter, inst2]];
             code = [inst1.body];
           } else {
-            state.push(Variable.from(`(${instructionToString(inst1)} ${instructionToString(inst2)})`));
+            state.push(Unevaluated.from(`(${instructionToString(inst1)} ${instructionToString(inst2)})`));
           }
           break;
       }
